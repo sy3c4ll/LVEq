@@ -20,7 +20,7 @@ void setup(){
   }
 }
 public float dis(int k, int q){
-  return (pred[k].getLoc().x-prey[q].getLoc().x)*(pred[k].getLoc().x-prey[q].getLoc().x)+(pred[k].getLoc().y-prey[q].getLoc().y)*(pred[k].getLoc().y-prey[q].getLoc().y);
+  return dist(pred[k].getLoc().x,pred[k].getLoc().y,prey[q].getLoc().x,prey[q].getLoc().y);
 }//pred[k]_prey[q] dis^2
 public int hunt(int k)
 {
