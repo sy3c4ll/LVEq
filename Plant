@@ -1,17 +1,17 @@
 public class Plant{
-  private int age;
+  private float age;
   private boolean alive;
   private int xp;
   private int yp;
-  public Plant(int age, boolean alive, int xp, int yp){
+  public Plant(float age, boolean alive, int xp, int yp){
   this.age=age;
   this.alive=alive;
   this.xp=xp;
   this.yp=yp;
   }
-  public void setage(int age){this.age=age;}
+  public void setage(float age){this.age=age;}
   public void setalive(boolean alive){this.alive=alive;}
-  public int getage(){return this.age;}
+  public float getage(){return this.age;}
   public boolean getalive(){return this.alive;}
   public int getxp(){return this.xp;}
   public int getyp(){return this.yp;}
