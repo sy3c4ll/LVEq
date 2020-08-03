@@ -1,0 +1,239 @@
+###변수, 함수 설명###
+
+===LVEq.pde===
+final boolean FRAMEDEPENDENCY:
+참이면 시간에 의존하여, 거짓이면 프레임에 의존하여 애니메이션을 시작한다.
+연구 중에는 거짓으로 유지하는 것을 추천.
+
+final float AGE_GRADIENT:
+단위 시간(1ms) 또는 프레임(1프레임)당 증가하는 나이.
+모든 동식물에 대해 같게 설정되어 있다.
+
+final int PREDATOR_NUM:
+포식자의 개체수.
+
+final int PREY_NUM:
+피식자의 개체수.
+
+final int PLANT_NUM:
+식물의 개체수.
+
+Animal[] predator:
+Predator타입의, 포식자 개체군.
+
+Animal[] prey:
+Prey타입의, 피식자 개체군.
+
+Plant[] plant:
+Plant타입의, 식물 개체군.
+
+==============
+
+===Animal.pde===
+float hunger:
+포만도.
+protected형으로, 동물.hunger 대신 getter(float getHunger())와 setter(void setHunger(float hunger))를 쓴다.
+(이하 protected형에 대해 자세한 설명을 생략하고 getter와 setter의 이름만 제시하겠다.)
+
+float age:
+나이.
+getAge와 setAge로 호출.
+
+float SIZE:
+크기. 이론적으로 상수, 코드 중 수정하는 일이 없도록.
+getSize로 호출. setter는 없다.
+
+float MAX_SPEED:
+최고속력. 이론적으로 상수, 코드 중 수정하는 일이 없도록.
+getMaxSpeed로 호출. setter는 없다.
+
+boolean alive:
+생사 여부. Object Pool 패턴을 적용하기 위해 존재한다.
+getAlive와 setAlive로 호출.
+
+int CLOCK:
+시작한 이후로의 시간 또는 프레임수. 애니메이션의 실행을 위해 존재한다.
+getClock로 호출. setter는 없다.
+
+PVector p:
+PVector형으로의 위치. PVector 클래스의 메소드를 그대로 적용할 수 있다.
+public형으로, 직접 호출한다.
+getLoc, setLoc로 호출할 수도 있다.
+
+PVector v:
+PVector형으로의 위치. PVector 클래스의 메소드를 그대로 적용할 수 있다.
+public형으로, 직접 호출한다.
+getVelo, setVelo로 호출할 수도 있다.
+
+float getAge(), float getHunger(), boolean getAlive(), float getSize(),
+float getMaxSpeed(), PVector getLoc(), PVector getVelo(), int getClock():
+getter. 설명을 생략한다.
+
+float getSpeed():
+속력, 즉 속도의 크기를 반환한다.
+
+float getDir():
+속도의 방향을 라디안으로 반환한다.
++x가 0, 반시계방향이 증가다.
+
+void setHunger(float hunger), void setAlive(boolean alive), void setLoc(PVector p), void setVelo(PVector v):
+setter. 설명을 생략한다.
+
+void setSpeed(float s):
+방향을 그대로 유지하면서 속도의 크기만 s로 바꾼다.
+
+void setDir(float theta):
+속력을 그대로 유지하면서 방향만 theta로 바꾼다.
+
+void rotateDir(float theta):
+속력을 그대로 유지하면서 방향의 각도에 theta를 더한다.
+
+boolean detectCollisionX():
+호출한 개체와 x축에 수직인 벽과의 충돌 여부 반환.
+
+boolean detectCollisionY():
+호출한 개체와 y축에 수직인 벽과의 충돌 여부 반환.
+
+boolean detectCollision(Animal x):
+호출한 개체와 주어진 동물의 충돌 여부 반환.
+메소드 오버로딩에 의해 사용할 때에는 동식물 구분 필요 없음.
+
+boolean detectCollision(Plant x):
+호출한 개체와 주어진 식물의 충돌 여부 반환.
+메소드 오버로딩에 의해 사용할 때에는 동식물 구분 필요 없음.
+
+void update():
+속도에 의거해 위치를 갱신하고, grow()와 display()를 호출.
+draw() 돌아갈 때마다 호출 바람.
+
+void grow():
+AGE_GRADIENT에 의거해 나이를 갱신.
+protected형으로, 외부에서 호출 불가능. update()에서 자동 호출됨.
+
+void display():
+동물을 타원으로 캔버스에 표시.
+protected형으로, 외부에서 호출 불가능. update()에서 자동 호출됨.
+
+================
+
+===Plant.pde===
+final float MAX_AGE:
+식물이 죽는 나이.
+상수.
+Plant.MAX_AGE로 호출.
+
+final float MIN_AGE:
+식물이... 살아나는 나이? @TODO
+상수.
+Plant.MIN_AGE로 호출.
+
+float age:
+나이.
+getAge와 setAge로 호출.
+
+float SIZE:
+크기. 이론적으로 상수, 코드 중 수정하는 일이 없도록.
+getSize로 호출. setter는 없다.
+
+boolean alive:
+생사 여부. Object Pool 패턴을 적용하기 위해 존재한다.
+getAlive와 setAlive로 호출.
+
+PVector p:
+PVector형으로의 위치.
+public형으로, 직접 호출한다.
+getLoc로 호출할 수도 있다. setter는 없다.
+
+int CLOCK:
+시작한 이후로의 시간 또는 프레임수. 애니메이션의 실행을 위해 존재한다.
+getClock로 호출. setter는 없다.
+
+float getAge(), float getSize(), boolean getAlive(), PVector getLoc(), int getClock():
+getter. 설명은 생략한다.
+
+void setAge(float age), void setAlive(boolean alive):
+setter. 설명은 생략한다.
+
+void update():
+펜을 청색으로 설정, 나이 조건을 체크하고, grow()와 display()를 호출.
+draw() 돌아갈 떄마다 호출 바람.
+
+void grow():
+AGE_GRADIENT에 의거해 나이를 갱신.
+protected형으로, 외부에서 호출 불가능. update()에서 자동 호출됨.
+
+void display():
+식물을 타원으로 캔버스에 표시.
+protected형으로, 외부에서 호출 불가능. update()에서 자동 호출됨.
+
+===============
+
+===Predator.pde===
+final float WALKING_SPEED:
+포식자의 보통 속력.
+상수.
+Predator.WALKING_SPEED로 호출.
+
+final float RUNNING_SPEED:
+포식자의 추격 중 속력.
+상수.
+Predator.RUNNING_SPEED로 호출.
+
+final float CRITICAL_HUNGER:
+포식자가 죽는 포만도값.
+상수.
+Predator.CRITICAL_HUNGER로 호출.
+
+final float HUNGER_GRADIENT:
+단위 시간(1ms) 또는 프레임(1프레임) 동안 포식자의 포만도 감소량.
+상수.
+Predator.HUNGER_GRADIENT로 호출.
+
+final float MAX_AGE:
+포식자의 최대 나이.
+상수.
+Predator.MAX_AGE로 호출.
+
+int hunt(Prey[] x):
+주어진 피식자 목록 중, 호출한 개체에서 가장 가까운 피식자의 인덱스 반환.
+int x=포식자.hunt(prey) 이런 식으로 LVEq.pde에서 호출.
+
+void update():
+펜을 적색으로 설정한 후 Animal의 update()를 실행.
+
+==================
+
+===Prey.pde===
+final float WALKING_SPEED:
+피식자의 보통 속력.
+상수.
+Prey.WALKING_SPEED로 호출.
+
+final float RUNNING_SPEED:
+피식자의 도망 중 속력.
+상수.
+Prey.RUNNING_SPEED로 호출.
+
+final float CRITICAL_HUNGER:
+피식자가 죽는 포만도값.
+상수.
+Prey.CRITICAL_HUNGER로 호출.
+
+final float HUNGER_GRADIENT:
+단위 시간(1ms) 또는 프레임(1프레임) 동안 피식자의 포만도 감소량.
+상수.
+Prey.HUNGER_GRADIENT로 호출.
+
+final float MAX_AGE:
+피식자의 최대 나이.
+상수.
+Prey.MAX_AGE로 호출.
+
+int hunt(Plant[] x):
+주어진 식물 목록 중, 호출한 개체에서 가장 가까운 식물의 인덱스 반환.
+int x=피식자.hunt(plant) 이런 식으로 LVEq.pde에서 호출.
+
+void update():
+펜을 녹색으로 설정한 후 Animal의 update()를 실행.
+
+==============
