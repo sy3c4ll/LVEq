@@ -24,7 +24,8 @@ public class Animal{
   public void rotateDir(float theta){this.v.rotate(theta);}
   public boolean detectCollisionX(){return this.getLoc().x<this.getSize()||this.getLoc().x>width-this.getSize();}
   public boolean detectCollisionY(){return this.getLoc().y<this.getSize()||this.getLoc().y>height-this.getSize();}
-  public boolean detectCollision(Animal a){return PVector.dist(this.getLoc(),a.getLoc())<this.getSize()+a.getSize();}
+  public boolean detectCollision(Animal x){return PVector.dist(this.getLoc(),x.getLoc())<this.getSize()+x.getSize();}
+  public boolean detectCollision(Plant x){return PVector.dist(this.getLoc(),x.getLoc())<this.getSize()+x.getSize();}
   public void update(){this.p.add(PVector.mult(this.v,FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK));this.v.limit(MAX_SPEED);this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;this.grow();this.display();}
   protected void grow(){this.age+=(FRAMEDEPENDENCY?millis()-CLOCK:frameCount-CLOCK)*AGE_GRADIENT;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
   protected void display(){if(this.alive)ellipse(this.p.x,this.p.y,this.SIZE*2,this.SIZE*2);}

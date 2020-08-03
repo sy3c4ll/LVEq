@@ -1,4 +1,4 @@
-final boolean FRAMEDEPENDENCY=true; //<>//
+final boolean FRAMEDEPENDENCY=false; //<>//
 final float AGE_GRADIENT=1;
 final int PREDATOR_NUM=1000,PREY_NUM=1000,PLANT_NUM=2000;
 Animal[] predator,prey;
