@@ -1,0 +1,11 @@
+***changelog***
+
+changed feed to hunger, event to CLOCK, pred to predator
+update() now automatically calls display()
+combined displayit() and displayplant() in Plant
+made final variables static
+created a single variable for frame dependency
+made vectors public- pred[i].v.x is now legal. getters have not been removed, will review making other fields public as inconveniences arise
+removed acceleration
+changed private to protected- allows referencing in subclasses, otherwise no real difference
+moved code for grow() for increasing age, hunt() for finding food to relevant classes
