@@ -13,7 +13,7 @@ public class Plant{
   public void setAge(float age){this.age=age;}
   public void setAlive(boolean alive){this.alive=alive;}
   public void setLoc(PVector p){this.p=p;}
-  public void update(){if(this.age<Plant.MIN_AGE)this.alive=false;else this.alive=true;this.grow();this.display();}
-  protected void grow(){this.age+=((FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK)*AGE_GRADIENT)%Plant.MAX_AGE;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
+  public void update(){if(this.age<Plant.MIN_AGE){this.alive=false;}else {this.alive=true;}this.grow();this.display();}
+  protected void grow(){this.age=(this.age+(FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK)*AGE_GRADIENT)%Plant.MAX_AGE;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
   protected void display(){fill(#0000FF);if(this.alive)ellipse(this.p.x,this.p.y,this.SIZE*2,this.SIZE*2);}
 }

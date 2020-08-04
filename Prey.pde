@@ -1,5 +1,5 @@
 public class Prey extends Animal{
-  public static final float CRITICAL_HUNGER=0,DANGER_HUNGER=30,HUNGER_GRADIENT=0,MAX_AGE=30,DANGER_DIST=7;
+  public static final float DANGER_HUNGER=30,MAX_AGE=30,DANGER_DIST=7;
   public Prey(float age,float hunger,float size,boolean alive,float walkingspeed,float runningspeed,PVector p){super(age,hunger,size,alive,walkingspeed,runningspeed,p);}
   public boolean hungry(){return this.hunger<=Prey.DANGER_HUNGER;}
   public boolean danger(Predator[] x){
