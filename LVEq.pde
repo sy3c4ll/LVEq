@@ -1,4 +1,4 @@
-final boolean FRAMEDEPENDENCY=false; //<>// //<>//
+final boolean FRAMEDEPENDENCY=false; //<>// //<>// //<>//
 final float AGE_GRADIENT=1;
 final int PREDATOR_NUM=1000,PREY_NUM=1000,PLANT_NUM=2000;
 Predator[] predator;Prey[] prey;Plant[] plant;
@@ -12,8 +12,8 @@ void setup(){
   size(1000,1000,P2D);surface.setTitle("Lotka-Volterra Equations");surface.setResizable(false);frameRate(600);
   background(#000000);noStroke();fill(#FFFFFF);
   predator=new Predator[PREDATOR_NUM];prey=new Prey[PREY_NUM];plant=new Plant[PLANT_NUM];
-  for(int i=0;i<PREDATOR_NUM;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(3,5),.5,true,new PVector(random(width),random(height)),new PVector(rand(.4,.8),rand(.4,.8)));
-  for(int i=0;i<PREY_NUM;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(2,4),.5,true,new PVector(random(width),random(height)),new PVector(rand(.4,.8),rand(.4,.8)));
+  for(int i=0;i<PREDATOR_NUM;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(3,5),true,new PVector(random(width),random(height)),new PVector(rand(4,8),rand(4,8)));
+  for(int i=0;i<PREY_NUM;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(2,4),true,new PVector(random(width),random(height)),new PVector(rand(.4,.8),rand(.4,.8)));
   for(int i=0;i<PLANT_NUM;i++)plant[i]= new Plant(random(Plant.MIN_AGE,Plant.MAX_AGE),true,new PVector(random(width),random(height)));
 }
 void draw(){

@@ -1,15 +1,14 @@
 public class Animal{
-  protected float hunger,age,SIZE,MAX_SPEED;
+  protected float hunger,age,SIZE;
   protected boolean alive;
   protected int CLOCK;
   public PVector p,v;
-  public Animal(float age,float hunger,float size,float maxspeed,boolean alive,PVector p){this.age=age; this.hunger=hunger;this.SIZE=size;this.MAX_SPEED=maxspeed;this.alive=alive;this.p=p;this.v=new PVector(0,0);this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
-  public Animal(float age,float hunger,float size,float maxspeed,boolean alive,PVector p,PVector v){this.age=age;this.hunger=hunger;this.SIZE=size;this.MAX_SPEED=maxspeed;this.alive=alive;this.p=p;this.v=v;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
+  public Animal(float age,float hunger,float size,boolean alive,PVector p){this.age=age; this.hunger=hunger;this.SIZE=size;this.alive=alive;this.p=p;this.v=new PVector(0,0);this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
+  public Animal(float age,float hunger,float size,boolean alive,PVector p,PVector v){this.age=age;this.hunger=hunger;this.SIZE=size;this.alive=alive;this.p=p;this.v=v;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
   public float getAge(){return this.age;}
   public float getHunger(){return this.hunger;}
   public boolean getAlive(){return this.alive;}
   public float getSize(){return this.SIZE;}
-  public float getMaxSpeed(){return this.MAX_SPEED;}
   public PVector getLoc(){return this.p;}
   public PVector getVelo(){return this.v;}
   public float getSpeed(){return this.v.mag();}
