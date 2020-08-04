@@ -25,4 +25,5 @@ void draw(){
   for(int i=0;i<PREY_NUM;i++)prey[i].update();
   for(int i=0;i<PLANT_NUM;i++)plant[i].update();
   println(frameRate);
+  println("dkdk");
 }
