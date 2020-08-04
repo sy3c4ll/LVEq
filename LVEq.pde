@@ -23,7 +23,7 @@ public void draw(){
     if(prey[i].detectCollisionY()){prey[i].p.y=min(max(prey[i].p.y,prey[i].getSize()),height-prey[i].getSize());prey[i].v.y=-prey[i].v.y;}
   }
   for(int i=0;i<PREDATOR_NUM;i++){predator[i].hunting(prey);predator[i].update();}
-  for(int i=0;i<PREY_NUM;i++)prey[i].update();
+  for(int i=0;i<PREY_NUM;i++){prey[i].feeding(plant);prey[i].update();}
   for(int i=0;i<PLANT_NUM;i++)plant[i].update();
   println(frameRate);
 }
