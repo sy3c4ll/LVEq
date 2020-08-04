@@ -11,6 +11,6 @@ public class Prey extends Animal{
     for(int i=0;i<x.length;i++)if(PVector.dist(this.p,x[i].p)<=DANGER_DIST)return true;
     return false;
   }
-  public boolean hungry(){return this.hunger<=this.DANGER_HUNGER;}
+  public boolean hungry(){return this.hunger<=Prey.DANGER_HUNGER;}
   @Override public void update(){fill(#00FF00);super.update();}
 }
