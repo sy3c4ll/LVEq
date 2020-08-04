@@ -7,10 +7,10 @@ public class Prey extends Animal{
     for(int i=0;i<x.length;i++)if(PVector.dist(this.p,x[i].p)<PVector.dist(this.p,x[index].p))index=i;
     return index;
   }
-  public boolean hungry(){return this.hunger<=this.DANGER_HUNGER;}
   public boolean danger(Predator[] x){
     for(int i=0;i<x.length;i++)if(PVector.dist(this.p,x[i].p)<=DANGER_DIST)return true;
     return false;
   }
+  public boolean hungry(){return this.hunger<=this.DANGER_HUNGER;}
   @Override public void update(){fill(#00FF00);super.update();}
 }
