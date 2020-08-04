@@ -25,7 +25,7 @@ public void draw(){
     for(int j=0;j<PLANT_NUM;j++)if(prey[i].detectCollision(plant[j])){prey[i].feed(plant[j].getAge()*PLANT_TO_PREY_E);plant[j].setAlive(false);}
   }
   for(int i=0;i<PREDATOR_NUM;i++){predator[i].hunting(prey);predator[i].update();}
-  for(int i=0;i<PREY_NUM;i++)prey[i].update();
+  for(int i=0;i<PREY_NUM;i++){prey[i].feeding(plant);prey[i].update();}
   for(int i=0;i<PLANT_NUM;i++)plant[i].update();
   println(frameRate);
 }

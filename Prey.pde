@@ -11,5 +11,15 @@ public class Prey extends Animal{
     for(int i=0;i<x.length;i++)if(PVector.dist(this.p,x[i].p)<PVector.dist(this.p,x[index].p))index=i;
     return index;
   }
+   public void feeding(Plant[] k){
+    if(this.hungry()&&this.alive){
+      for(int i=0;i<PREY_NUM;i++)if(this.hungry()&&k[i].alive&&!this.danger(predator)){
+        this.v.x=k[this.hunt(k)].p.x-this.p.x;
+        this.v.y=k[this.hunt(k)].p.y-this.p.y;
+        this.setSpeed(this.RUNNING_SPEED);
+      }
+      return;
+    }
+  }
   @Override public void update(){fill(#00FF00);super.update();}
 }
