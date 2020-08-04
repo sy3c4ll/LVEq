@@ -1,11 +1,10 @@
 public class Animal{
   public static final float BASAL_META=.1,ACTIVE_META=.05;
-  protected float hunger,age,SIZE,WALKING_SPEED=0,RUNNING_SPEED=0;
+  protected float hunger,age,SIZE,WALKING_SPEED,RUNNING_SPEED;
   protected boolean alive;
   protected int CLOCK;
   public PVector p,v;
-  public Animal(float age,float hunger,float size,boolean alive,PVector p){this.age=age; this.hunger=hunger;this.SIZE=size;this.alive=alive;this.p=p;this.v=new PVector(0,0);this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
-  public Animal(float age,float hunger,float size,boolean alive,PVector p,PVector v){this.age=age;this.hunger=hunger;this.SIZE=size;this.alive=alive;this.p=p;this.v=v;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
+  public Animal(float age,float hunger,float size,boolean alive,float walkingspeed,float runningspeed,PVector p){this.age=age;this.hunger=hunger;this.SIZE=size;this.alive=alive;this.WALKING_SPEED=walkingspeed;this.RUNNING_SPEED=runningspeed;this.p=p;this.v=PVector.random2D();this.v.limit(walkingspeed);this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
   public float getAge(){return this.age;}
   public float getHunger(){return this.hunger;}
   public boolean getAlive(){return this.alive;}

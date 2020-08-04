@@ -1,7 +1,6 @@
 public class Predator extends Animal{
   public static final float CRITICAL_HUNGER=0,DANGER_HUNGER=30,HUNGER_GRADIENT=0,MAX_AGE=20;
-  public Predator(float age,float hunger,float size,boolean alive,PVector p){super(age,hunger,size,alive,p);}
-  public Predator(float age,float hunger,float size,boolean alive,PVector p,PVector v){super(age,hunger,size,alive,p,v);}
+  public Predator(float age,float hunger,float size,boolean alive,float walkingspeed,float runningspeed,PVector p){super(age,hunger,size,alive,walkingspeed,runningspeed,p);}
   public boolean hungry(){return this.hunger<=Predator.DANGER_HUNGER;}
   public int hunt(Prey[] x){
     int index=0;
