@@ -9,15 +9,16 @@ public class Predator extends Animal{
     return index;
   }
   public void hunting(Prey[] k){
-    if(this.hungry()&&this.alive)
-      for(int i=0;i<PREY_NUM;i++)if(PVector.dist(this.p,k[i].p)<Prey.DANGER_DIST&&prey[i].alive){
-        prey[i].v.x=prey[i].p.x-this.p.x;
-        prey[i].v.y=prey[i].p.y-this.p.y;
-        prey[i].setSpeed(k.RUNNING_SPEED);
+    if(this.hungry()&&this.alive){
+      for(int i=0;i<PREY_NUM;i++)if(PVector.dist(this.p,k[i].p)<Prey.DANGER_DIST&&k[i].alive){
+        k[i].v.x=k[i].p.x-this.p.x;
+        k[i].v.y=k[i].p.y-this.p.y;
+        k[i].setSpeed(k[i].RUNNING_SPEED);
       }
-      this.v.x=k[this.hunt(prey)].p.x-this.p.x;
-      this.v.y=k[this.hunt(prey)].p.y-this.p.y;
+      this.v.x=k[this.hunt(k)].p.x-this.p.x;
+      this.v.y=k[this.hunt(k)].p.y-this.p.y;
       this.setSpeed(this.RUNNING_SPEED);
+    }
   }
   @Override public void update(){fill(#FF0000);super.update();}
 }
