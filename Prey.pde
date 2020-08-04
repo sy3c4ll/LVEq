@@ -6,14 +6,14 @@ public class Prey extends Animal{
     for(int i=0;i<x.length;i++)if(PVector.dist(this.p,x[i].p)<=Prey.DANGER_DIST)return true;
     return false;
   }
-  public int hunt(Plant[] x){
+  public int hunt(Plant[] k){
     int index=0;
-    for(int i=0;i<x.length;i++)if(PVector.dist(this.p,x[i].p)<PVector.dist(this.p,x[index].p))index=i;
+    for(int i=0;i<k.length;i++)if(PVector.dist(this.p,k[i].p)<PVector.dist(this.p,k[index].p))index=i;
     return index;
   }
-   public void feeding(Plant[] k){
-    if(this.hungry()&&this.alive){
-      for(int i=0;i<PREY_NUM;i++)if(this.hungry()&&k[i].alive&&!this.danger(predator)){
+   public void feeding(Plant[] k,Predator[] l){
+    if(this.hungry()&&this.alive&&!this.danger(l)){
+      for(int i=0;i<k.length;i++)if(PVector.dist(this.p,k[i].p)<=Animal.SIGHT&&k[i].alive){
         this.v.x=k[this.hunt(k)].p.x-this.p.x;
         this.v.y=k[this.hunt(k)].p.y-this.p.y;
         this.setSpeed(this.RUNNING_SPEED);

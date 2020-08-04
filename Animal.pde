@@ -1,5 +1,5 @@
 public class Animal{
-  public static final float BASAL_META=.1,ACTIVE_META=.05;
+  public static final float BASAL_META=.1,ACTIVE_META=.05,SIGHT=10;
   protected float hunger,age,SIZE,WALKING_SPEED,RUNNING_SPEED;
   protected boolean alive;
   protected int CLOCK;
