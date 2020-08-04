@@ -1,5 +1,5 @@
 final boolean FRAMEDEPENDENCY=false; //<>//
-final float AGE_GRADIENT=1,PREY_TO_PREDATOR_E=1,PLANT_TO_PREY_E=1;
+final float AGE_GRADIENT=0.01,PREY_TO_PREDATOR_E=1,PLANT_TO_PREY_E=1;
 final int PREDATOR_NUM=1000,PREY_NUM=1000,PLANT_NUM=2000;
 Predator[] predator;Prey[] prey;Plant[] plant;
 public float dis(int i,int j){return PVector.dist(predator[i].p,prey[j].p);}
@@ -22,7 +22,7 @@ public void draw(){
   for(int i=0;i<PREY_NUM;i++){
     if(prey[i].detectCollisionX()){prey[i].p.x=min(max(prey[i].p.x,prey[i].getSize()),width-prey[i].getSize());prey[i].v.x=-prey[i].v.x;}
     if(prey[i].detectCollisionY()){prey[i].p.y=min(max(prey[i].p.y,prey[i].getSize()),height-prey[i].getSize());prey[i].v.y=-prey[i].v.y;}
-    if(prey[i].hungry())for(int j=0;j<PLANT_NUM;j++)if(prey[i].detectCollision(plant[j])){prey[i].feed(plant[j].getAge()*PLANT_TO_PREY_E);plant[j].setAlive(false);}
+    if(prey[i].hungry())for(int j=0;j<PLANT_NUM;j++)if(prey[i].detectCollision(plant[j])){prey[i].feed(plant[j].getAge()*PLANT_TO_PREY_E);plant[j].setAge(0);}
   }
   for(int i=0;i<PREDATOR_NUM;i++){predator[i].hunting(prey);predator[i].update();}
   for(int i=0;i<PREY_NUM;i++){prey[i].feeding(plant,predator);prey[i].update();}

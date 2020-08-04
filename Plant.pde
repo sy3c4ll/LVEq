@@ -4,7 +4,7 @@ public class Plant{
   protected boolean alive;
   public PVector p;
   protected int CLOCK;
-  public Plant(float age,boolean alive,PVector p){this.age=age;this.SIZE=1.5;this.alive=alive;this.p=p;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
+  public Plant(float age,boolean alive,PVector p){this.age=age;this.SIZE=2.5;this.alive=alive;this.p=p;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
   public float getAge(){return this.age;}
   public float getSize(){return this.SIZE;}
   public boolean getAlive(){return this.alive;}
