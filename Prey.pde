@@ -8,7 +8,7 @@ public class Prey extends Animal{
     return index;
   }
   public boolean danger(Predator[] x){
-    for(int i=0;i<x.length;i++)if(PVector.dist(this.p,x[i].p)<=DANGER_DIST)return true;
+    for(int i=0;i<x.length;i++)if(PVector.dist(this.p,x[i].p)<=Prey.DANGER_DIST)return true;
     return false;
   }
   public boolean hungry(){return this.hunger<=this.DANGER_HUNGER;}
