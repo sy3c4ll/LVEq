@@ -18,6 +18,7 @@ public class Animal{
   public void setAlive(boolean alive){this.alive=alive;}
   public void setLoc(PVector p){this.p=p;}
   public void setVelo(PVector v){this.v=v;}
+  public void feed(float food){this.hunger+=food;}
   public void setSpeed(float s){this.v.setMag(s);}
   public void setDir(float theta){this.v=PVector.fromAngle(theta).setMag(this.v.mag());}
   public void rotateDir(float theta){this.v.rotate(theta);}
