@@ -17,6 +17,7 @@ public class Predator extends Animal{
       this.v.x=k[this.hunt(k)].p.x-this.p.x;
       this.v.y=k[this.hunt(k)].p.y-this.p.y;
       this.setSpeed(this.RUNNING_SPEED);
+      return;
     }
   }
   @Override public void update(){fill(#FF0000);super.update();}
