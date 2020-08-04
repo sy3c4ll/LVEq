@@ -1,11 +1,11 @@
-final boolean FRAMEDEPENDENCY=true; //<>// //<>//
+final boolean FRAMEDEPENDENCY=false; //<>//
 final float AGE_GRADIENT=1;
 final int PREDATOR_NUM=1000,PREY_NUM=1000,PLANT_NUM=2000;
 Animal[] predator,prey;
 Plant[] plant;
 float dis(int i,int j){return PVector.dist(predator[i].p,prey[j].p);}
 void setup(){
-  size(1000,1000,P2D);surface.setResizable(false);frameRate(600);
+  size(1000,1000,P2D);surface.setTitle("Lotka-Volterra Equations");surface.setResizable(false);frameRate(600);
   background(#000000);noStroke();fill(#FFFFFF);
   predator=new Predator[PREDATOR_NUM];prey=new Prey[PREY_NUM];plant=new Plant[PLANT_NUM];
   for(int i=0;i<PREDATOR_NUM;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(3,5),.5,true,new PVector(random(width),random(height)),new PVector(random(-.4,.4),random(-.4,.4)));
