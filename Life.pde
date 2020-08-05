@@ -1,5 +1,5 @@
 public class Life{
-  public static final float FRAMEHOUR=.1;
+  public static final double FRAMEHOUR=.1;
   public static final boolean FRAMEDEPENDENCY=false;
   protected double age;
   protected double SIZE;

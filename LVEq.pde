@@ -1,4 +1,4 @@
-final float PREY_TO_PREDATOR_E=10,PLANT_TO_PREY_E=10; //<>//
+final double PREY_TO_PREDATOR_E=10,PLANT_TO_PREY_E=10; //<>//
 final int PREDATOR_NUM=0,PREY_NUM=1000,PLANT_NUM=2000,ARRAY_SIZE=10;
 Predator[] predator;Prey[] prey;Plant[] plant;
 double random(double a,double b){return Math.random()*(b-a)+a;}
@@ -12,7 +12,6 @@ int preyHungry(){int sum=0;for(int i=0;i<PREY_NUM;i++)if(prey[i].isAlive()&&prey
 int predatorStarving(){int sum=0;for(int i=0;i<PREDATOR_NUM;i++)if(predator[i].getHunger()<=0)sum++;return sum;}
 int preyStarving(){int sum=0;for(int i=0;i<PREY_NUM;i++)if(prey[i].getHunger()<=0)sum++;return sum;}
 void setup(){
-  randomSeed(1);
   size(1000,1000,P2D);surface.setTitle("Lotka-Volterra Equations");surface.setResizable(false);frameRate(600);
   background(#000000);noStroke();fill(#FFFFFF);
   predator=new Predator[PREDATOR_NUM*ARRAY_SIZE];prey=new Prey[PREY_NUM*ARRAY_SIZE];plant=new Plant[PLANT_NUM*ARRAY_SIZE];
@@ -31,7 +30,7 @@ void draw(){
   for(int i=0;i<PREDATOR_NUM;i++){
     if(predator[i].detectCollisionX()){predator[i].p.x=min(max(predator[i].p.x,predator[i].getSize()),width-predator[i].getSize());predator[i].v.x=-predator[i].v.x;}
     if(predator[i].detectCollisionY()){predator[i].p.y=min(max(predator[i].p.y,predator[i].getSize()),height-predator[i].getSize());predator[i].v.y=-predator[i].v.y;}
-    if(predator[i].hungry()&&predator[i].isAlive())for(int j=0;j<PREY_NUM;j++)if(prey[j].isAlive()&&predator[i].detectCollision(prey[j])){predator[i].feed(min((float)prey[j].getorg()*(float)PREY_TO_PREDATOR_E,(float)100));prey[j].setAlive(false);}
+    if(predator[i].hungry()&&predator[i].isAlive())for(int j=0;j<PREY_NUM;j++)if(prey[j].isAlive()&&predator[i].detectCollision(prey[j])){predator[i].feed(min((float)prey[j].getOrg()*(float)PREY_TO_PREDATOR_E,(float)100));prey[j].setAlive(false);}
     predator[i].hunting();
   }
   for(int i=0;i<PREY_NUM;i++){

@@ -11,7 +11,7 @@ public class Predator extends Animal{
   public void hunting(){
     if(this.hungry()&&this.isAlive()){
       int index=this.hunt();
-         for(int i=0;i<b.length;i++){
+      for(int i=0;i<b.length;i++){
         if(PVector.dist(this.p,b[i].p)<=Prey.DANGER_DIST&&b[i].isAlive()){
         b[i].v.x=b[i].p.x-this.p.x;
         b[i].v.y=b[i].p.y-this.p.y;
@@ -23,10 +23,8 @@ public class Predator extends Animal{
         this.v.y=b[index].p.y-this.p.y;
         this.setSpeed((double)this.getRunningSpeed());
       }
-    }
-    else this.setSpeed((double)this.getWalkingSpeed());
-    
+    }else this.setSpeed((double)this.getWalkingSpeed());
   }
-  @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else {this.org-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed());}}
+  @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else{this.org-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed());}}
   @Override public void update(){fill(#FF0000);super.update();}
 }

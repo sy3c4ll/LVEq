@@ -8,7 +8,7 @@ public class Prey extends Animal{
     for(int i=0;i<c.length;i++)if(c[i].isAlive()&&Vector.dist(this.p,c[i].p)<Vector.dist(this.p,c[index].p)){index=i;flag=true;}
     return flag?index:-1;
   }
-   public void feeding(){
+  public void feeding(){
     if(this.hungry()&&this.isAlive()&&!this.danger()){
       int index=this.hunt();
       if(index!=-1&&Vector.dist(this.p,c[index].p)<=Animal.SIGHT&&c[index].alive){
@@ -16,10 +16,9 @@ public class Prey extends Animal{
         this.v.y=c[index].p.y-this.p.y;
         this.setSpeed((double)this.getRunningSpeed());
       }
-    }
-    else if(!this.danger()) {this.setSpeed((double)this.getWalkingSpeed());}
+    }else if(!this.danger()){this.setSpeed((double)this.getWalkingSpeed());}
   }
- /* protected void reproduce(){
+  /*protected void reproduce(){
     if(this.age>=ADULT_AGE&&frameCount%(BIRTH_CYCLE*365*24*FRAMEHOUR)==0){
       int i=0;
       for(;i<b.length&&b[i].isAlive();i++);
@@ -27,8 +26,6 @@ public class Prey extends Animal{
       else b[i].setAlive(true);
     }
   }*/
-   @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else {this.org-=Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed();}}
-  @Override public void update(){fill(#00FF00);
-//this.reproduce();
-super.update();}
+  @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else {this.org-=Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed();}}
+  @Override public void update(){fill(#00FF00);/*this.reproduce();*/super.update();}
 }
