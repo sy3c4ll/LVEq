@@ -20,7 +20,7 @@ public class Life{
   public void setLoc(Vector p){this.p=p;}
   public boolean detectCollisionX(){return this.getLoc().x<this.getSize()||this.getLoc().x>width-this.getSize();}
   public boolean detectCollisionY(){return this.getLoc().y<this.getSize()||this.getLoc().y>height-this.getSize();}
-  public boolean detectCollision(Life x){return Vector.dist(this.getLoc(),x.getLoc())<this.getSize()+x.getSize();}
+  public boolean detectCollision(Life x){return Vector.disten(this.getLoc(),x.getLoc())<this.getSize()+x.getSize();}
   public int regulate(){return FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK;}
   public void update(){grow();display();this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
   protected void grow(){this.age+=this.regulate()/(365*24)*FRAMEHOUR;}
