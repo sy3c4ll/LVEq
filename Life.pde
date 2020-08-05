@@ -1,14 +1,15 @@
 public class Life{
+  public static final double FRAMEHOUR=.1;
   public static final boolean FRAMEDEPENDENCY=false;
-  public static final float AGE_GRADIENT=.01;
-  protected float age,SIZE;
+  protected double age;
+  protected float SIZE;
   protected boolean alive,reproduced;
   protected int CLOCK;
   public PVector p;
   public Predator[] a;public Prey[] b;public Plant[] c;
-  public Life(float age,float size,boolean alive,PVector p){this.age=age;this.SIZE=size;this.alive=alive;this.reproduced=false;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;this.p=p;}
+  public Life(double age,float size,boolean alive,PVector p){this.age=age;this.SIZE=size;this.alive=alive;this.reproduced=false;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;this.p=p;}
   public void link(Predator[] a,Prey[] b,Plant[] c){this.a=a;this.b=b;this.c=c;}
-  public float getAge(){return this.age;}
+  public double getAge(){return this.age;}
   public float getSize(){return this.SIZE;}
   public boolean isAlive(){return this.alive;}
   public int getClock(){return this.CLOCK;}
@@ -21,6 +22,6 @@ public class Life{
   public boolean detectCollisionY(){return this.getLoc().y<this.getSize()||this.getLoc().y>height-this.getSize();}
   public boolean detectCollision(Life x){return PVector.dist(this.getLoc(),x.getLoc())<this.getSize()+x.getSize();}
   public void update(){grow();display();}
-  protected void grow(){this.age+=(FRAMEDEPENDENCY?millis()-CLOCK:frameCount-CLOCK)*AGE_GRADIENT;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
+  protected void grow(){this.age+=(FRAMEDEPENDENCY?millis()-CLOCK:frameCount-CLOCK)/(356*24)*FRAMEHOUR;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
   protected void display(){if(this.alive)ellipse(this.p.x,this.p.y,this.SIZE*2,this.SIZE*2);}
 }
