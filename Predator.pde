@@ -17,7 +17,10 @@ public class Predator extends Animal{
         this.setSpeed((float)this.getRunningSpeed());
       }
       for(int i=0;i<PREY_NUM;i++){
-        if(PVector.dist(this.p,b[i].p)<=Prey.DANGER_DIST&&b[i].isAlive()){b[i].v.x=b[i].p.x-this.p.x;b[i].v.y=b[i].p.y-this.p.y;b[i].setSpeed((float)b[i].getRunningSpeed());}
+        if(PVector.dist(this.p,b[i].p)<=Prey.DANGER_DIST&&b[i].isAlive()){
+        b[i].v.x=b[i].p.x-this.p.x;
+        b[i].v.y=b[i].p.y-this.p.y;
+        b[i].setSpeed((float)b[i].getRunningSpeed());}
         else b[i].setSpeed((float)b[i].getWalkingSpeed());
       }
     }

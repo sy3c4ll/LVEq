@@ -1,4 +1,4 @@
-final double PREY_TO_PREDATOR_E=1,PLANT_TO_PREY_E=1; //<>// //<>//
+final double PREY_TO_PREDATOR_E=1,PLANT_TO_PREY_E=10; //<>// //<>//
 final int PREDATOR_NUM=100,PREY_NUM=1000,PLANT_NUM=2000,ARRAY_SIZE=10;
 Predator[] predator;Prey[] prey;Plant[] plant;
 int predatorAlive(){int sum=0;for(int i=0;i<PREDATOR_NUM;i++)if(predator[i].isAlive())sum++;return sum;}
@@ -28,7 +28,7 @@ void draw(){
   for(int i=0;i<PREDATOR_NUM;i++){
     if(predator[i].detectCollisionX()){predator[i].p.x=min(max(predator[i].p.x,predator[i].getSize()),width-predator[i].getSize());predator[i].v.x=-predator[i].v.x;}
     if(predator[i].detectCollisionY()){predator[i].p.y=min(max(predator[i].p.y,predator[i].getSize()),height-predator[i].getSize());predator[i].v.y=-predator[i].v.y;}
-    if(predator[i].hungry()&&predator[i].isAlive())for(int j=0;j<PREY_NUM;j++)if(prey[j].isAlive()&&predator[i].detectCollision(prey[j])){predator[i].feed(prey[j].getHunger()*PREY_TO_PREDATOR_E);prey[j].setAlive(false);}
+    if(predator[i].hungry()&&predator[i].isAlive())for(int j=0;j<PREY_NUM;j++)if(prey[j].isAlive()&&predator[i].detectCollision(prey[j])){predator[i].feed(min((float)prey[j].getorg()*(float)PREY_TO_PREDATOR_E,(float)100));prey[j].setAlive(false);}
     predator[i].hunting();
   }
   for(int i=0;i<PREY_NUM;i++){
