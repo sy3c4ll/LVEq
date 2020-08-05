@@ -26,13 +26,13 @@ void draw(){
   for(int i=0;i<PREDATOR_NUM;i++){
     if(predator[i].detectCollisionX()){predator[i].p.x=min(max(predator[i].p.x,predator[i].getSize()),width-predator[i].getSize());predator[i].v.x=-predator[i].v.x;}
     if(predator[i].detectCollisionY()){predator[i].p.y=min(max(predator[i].p.y,predator[i].getSize()),height-predator[i].getSize());predator[i].v.y=-predator[i].v.y;}
-    if(predator[i].hungry()&&predator[i].isAlive())for(int j=0;j<PREY_NUM;j++)if(predator[i].detectCollision(prey[j])){predator[i].feed(prey[j].getHunger()*PREY_TO_PREDATOR_E);prey[j].setAlive(false);}
+    if(predator[i].hungry()&&predator[i].isAlive())for(int j=0;j<PREY_NUM;j++)if(prey[j].isAlive()&&predator[i].detectCollision(prey[j])){predator[i].feed(prey[j].getHunger()*PREY_TO_PREDATOR_E);prey[j].setAlive(false);}
     predator[i].hunting();
   }
   for(int i=0;i<PREY_NUM;i++){
     if(prey[i].detectCollisionX()){prey[i].p.x=min(max(prey[i].p.x,prey[i].getSize()),width-prey[i].getSize());prey[i].v.x=-prey[i].v.x;}
     if(prey[i].detectCollisionY()){prey[i].p.y=min(max(prey[i].p.y,prey[i].getSize()),height-prey[i].getSize());prey[i].v.y=-prey[i].v.y;}
-    if(prey[i].hungry()&&prey[i].isAlive())for(int j=0;j<PLANT_NUM;j++)if(prey[i].detectCollision(plant[j])){prey[i].feed(plant[j].getAge()*PLANT_TO_PREY_E);plant[j].setAge(0);}
+    if(prey[i].hungry()&&prey[i].isAlive())for(int j=0;j<PLANT_NUM;j++)if(plant[j].isAlive()&&prey[i].detectCollision(plant[j])){prey[i].feed(plant[j].getAge()*PLANT_TO_PREY_E);plant[j].setAge(0);}
     prey[i].feeding();
   }
   for(int i=0;i<PREDATOR_NUM;i++)predator[i].update();
