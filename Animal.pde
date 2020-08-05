@@ -1,5 +1,5 @@
 public class Animal extends Life{
-  public static final double BASAL_META=.1,ACTIVE_META=.05,SIGHT=10,CRITICAL_HUNGER=0;
+  public static final double BASAL_META=1,ACTIVE_META=.5,SIGHT=50,CRITICAL_ORG=0;
   protected double hunger,WALKING_SPEED,RUNNING_SPEED,org;
   public PVector v;
   public Animal(double age,double org,double hunger,float size,boolean alive,double walkingspeed,double runningspeed,PVector p){super(age,size,alive,p);this.hunger=hunger;this.org=org;this.WALKING_SPEED=walkingspeed;this.RUNNING_SPEED=runningspeed;this.v=PVector.random2D();this.v.limit((float)walkingspeed);}
@@ -17,7 +17,7 @@ public class Animal extends Life{
   public void setSpeed(float s){this.v.setMag(s);}
   protected void refresh(){this.p.add(PVector.mult(this.v,this.regulate()));}
   protected void metabolism(){}
-  protected void check(){if(this.hunger<Animal.CRITICAL_HUNGER)this.alive=false;}
+  protected void check(){if(this.org<Animal.CRITICAL_ORG)this.alive=false;}
   @Override protected void grow(){super.grow();}
   @Override protected void display(){super.display();}
   @Override public void update(){this.refresh();this.metabolism();this.check();super.update();}

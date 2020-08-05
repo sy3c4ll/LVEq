@@ -1,5 +1,5 @@
 public class Prey extends Animal{
-  public static final float DANGER_HUNGER=30,MAX_AGE=30,DANGER_DIST=7,BIRTH_CYCLE=3,ADULT_AGE=10;
+  public static final float DANGER_HUNGER=30,MAX_AGE=30,DANGER_DIST=70,BIRTH_CYCLE=3,ADULT_AGE=10;
   public Prey(double age,double org,double hunger,float size,boolean alive,double walkingspeed,double runningspeed,PVector p){super(age,org,hunger,size,alive,walkingspeed,runningspeed,p);}
   public boolean hungry(){return this.getHunger()<=Prey.DANGER_HUNGER;}
   public boolean danger(){for(int i=0;i<a.length;i++)if(PVector.dist(this.p,a[i].p)<=Prey.DANGER_DIST)return true;return false;}
@@ -17,6 +17,7 @@ public class Prey extends Animal{
         this.setSpeed((float)this.getRunningSpeed());
       }
     }
+    else if(!this.danger()) {this.setSpeed((float)this.getWalkingSpeed());}
   }
   protected void reproduce(){
     if(this.age>=ADULT_AGE&&frameCount%(BIRTH_CYCLE*365*24*FRAMEHOUR)==0){
@@ -26,5 +27,8 @@ public class Prey extends Animal{
       else b[i].setAlive(true);
     }
   }
-  @Override public void update(){fill(#00FF00);this.reproduce();super.update();}
+   @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else {this.org-=Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed();}}
+  @Override public void update(){fill(#00FF00);
+this.reproduce();
+super.update();}
 }

@@ -21,7 +21,9 @@ public class Predator extends Animal{
         else b[i].setSpeed((float)b[i].getWalkingSpeed());
       }
     }
+    else this.setSpeed((float)this.getWalkingSpeed());
+    
   }
-  @Override public void metabolism(){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}
+  @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else {this.org-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed());}}
   @Override public void update(){fill(#FF0000);super.update();}
 }
