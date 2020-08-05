@@ -1,38 +1,46 @@
-final boolean FRAMEDEPENDENCY=false; //<>//
-final float AGE_GRADIENT=0.01,PREY_TO_PREDATOR_E=1,PLANT_TO_PREY_E=1;
-final int PREDATOR_NUM=1000,PREY_NUM=1000,PLANT_NUM=2000;
+final float PREY_TO_PREDATOR_E=1,PLANT_TO_PREY_E=1; //<>//
+final int PREDATOR_NUM=1000,PREY_NUM=1000,PLANT_NUM=2000,ARRAY_SIZE=10;
 Predator[] predator;Prey[] prey;Plant[] plant;
-public float dis(int i,int j){return PVector.dist(predator[i].p,prey[j].p);}
-public float rand(float a,float b){return (random(-1,1)<0?-1:1)*random(a,b);}
-public void setup(){
+int predatorAlive(){int sum=0;for(int i=0;i<PREDATOR_NUM;i++)if(predator[i].isAlive())sum++;return sum;}
+int preyAlive(){int sum=0;for(int i=0;i<PREY_NUM;i++)if(prey[i].isAlive())sum++;return sum;}
+int plantAlive(){int sum=0;for(int i=0;i<PLANT_NUM;i++)if(plant[i].isAlive())sum++;return sum;}
+void setup(){
+  randomSeed(1);
   size(1000,1000,P2D);surface.setTitle("Lotka-Volterra Equations");surface.setResizable(false);frameRate(600);
   background(#000000);noStroke();fill(#FFFFFF);
-  predator=new Predator[PREDATOR_NUM];prey=new Prey[PREY_NUM];plant=new Plant[PLANT_NUM];
+  predator=new Predator[PREDATOR_NUM*ARRAY_SIZE];prey=new Prey[PREY_NUM*ARRAY_SIZE];plant=new Plant[PLANT_NUM*ARRAY_SIZE];
   for(int i=0;i<PREDATOR_NUM;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(3,5),true,random(.4,.8),random(.8,1.2),new PVector(random(width),random(height)));
   for(int i=0;i<PREY_NUM;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(2,4),true,random(.4,.8),random(.8,1.2),new PVector(random(width),random(height)));
-  for(int i=0;i<PLANT_NUM;i++)plant[i]= new Plant(random(Plant.MIN_AGE,Plant.MAX_AGE),true,new PVector(random(width),random(height)));
+  for(int i=0;i<PLANT_NUM;i++)plant[i]=new Plant(random(Plant.MIN_AGE,Plant.MAX_AGE),new PVector(random(width),random(height)));
+  for(int i=PREDATOR_NUM;i<PREDATOR_NUM*ARRAY_SIZE;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(3,5),false,random(.4,.8),random(.8,1.2),new PVector(random(width),random(height)));
+  for(int i=PREY_NUM;i<PREY_NUM*ARRAY_SIZE;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(2,4),false,random(.4,.8),random(.8,1.2),new PVector(random(width),random(height)));
+  for(int i=PLANT_NUM;i<PLANT_NUM*ARRAY_SIZE;i++)plant[i]=new Plant(random(0,Plant.MIN_AGE),new PVector(random(width),random(height))); //TODO
+  for(int i=0;i<PREDATOR_NUM*ARRAY_SIZE;i++)predator[i].link(predator,prey,plant);
+  for(int i=0;i<PREY_NUM*ARRAY_SIZE;i++)prey[i].link(predator,prey,plant);
+  for(int i=0;i<PLANT_NUM*ARRAY_SIZE;i++)plant[i].link(predator,prey,plant);
 }
-int predalivenum(){int sum=0; for (int i=0;i<PREDATOR_NUM;i++)if(predator[i].alive)sum++; return sum;}
-int preyalivenum(){int sum=0; for (int i=0;i<PREY_NUM;i++)if(prey[i].alive)sum++; return sum;}
-int plantalivenum(){int sum=0; for (int i=0;i<PLANT_NUM;i++)if(plant[i].alive)sum++; return sum;}
-public void draw(){
+void draw(){
   background(#000000);
   for(int i=0;i<PREDATOR_NUM;i++){
     if(predator[i].detectCollisionX()){predator[i].p.x=min(max(predator[i].p.x,predator[i].getSize()),width-predator[i].getSize());predator[i].v.x=-predator[i].v.x;}
     if(predator[i].detectCollisionY()){predator[i].p.y=min(max(predator[i].p.y,predator[i].getSize()),height-predator[i].getSize());predator[i].v.y=-predator[i].v.y;}
-    if(predator[i].hungry())for(int j=0;j<PREY_NUM;j++)if(predator[i].detectCollision(prey[j])){predator[i].feed(prey[j].getHunger()*PREY_TO_PREDATOR_E);prey[j].setAlive(false);}
+    if(predator[i].hungry()&&predator[i].isAlive())for(int j=0;j<PREY_NUM;j++)if(predator[i].detectCollision(prey[j])){predator[i].feed(prey[j].getHunger()*PREY_TO_PREDATOR_E);prey[j].setAlive(false);}
+    predator[i].hunting();
   }
   for(int i=0;i<PREY_NUM;i++){
     if(prey[i].detectCollisionX()){prey[i].p.x=min(max(prey[i].p.x,prey[i].getSize()),width-prey[i].getSize());prey[i].v.x=-prey[i].v.x;}
     if(prey[i].detectCollisionY()){prey[i].p.y=min(max(prey[i].p.y,prey[i].getSize()),height-prey[i].getSize());prey[i].v.y=-prey[i].v.y;}
-    if(prey[i].hungry()&&prey[i].alive)for(int j=0;j<PLANT_NUM;j++)if(prey[i].detectCollision(plant[j])){prey[i].feed(plant[j].getAge()*PLANT_TO_PREY_E);plant[j].setAge(0);}
+    if(prey[i].hungry()&&prey[i].isAlive())for(int j=0;j<PLANT_NUM;j++)if(prey[i].detectCollision(plant[j])){prey[i].feed(plant[j].getAge()*PLANT_TO_PREY_E);plant[j].setAge(0);}
+    prey[i].feeding();
   }
-  for(int i=0;i<PREDATOR_NUM;i++){predator[i].hunting(prey);predator[i].update();}
-  for(int i=0;i<PREY_NUM;i++){prey[i].feeding(plant,predator);prey[i].update();}
+  for(int i=0;i<PREDATOR_NUM;i++)predator[i].update();
+  for(int i=0;i<PREY_NUM;i++)prey[i].update();
   for(int i=0;i<PLANT_NUM;i++)plant[i].update();
-  if(keyPressed){
-  println("predator : "+predalivenum());
-  println("prey : "+preyalivenum());
-  println("plant : "+plantalivenum());
 }
+void keyPressed(){
+  println(Life.FRAMEDEPENDENCY?millis()+"ms":"Frame "+frameCount+" ("+frameRate+"fps)");
+  println("Predator : "+predatorAlive());
+  println("Prey : "+preyAlive());
+  println("Plant : "+plantAlive());
+  println();
 }

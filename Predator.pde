@@ -1,27 +1,24 @@
 public class Predator extends Animal{
-  public static final float DANGER_HUNGER=80,MAX_AGE=20;
+  public static final float DANGER_HUNGER=30,MAX_AGE=20;
   public Predator(float age,float hunger,float size,boolean alive,float walkingspeed,float runningspeed,PVector p){super(age,hunger,size,alive,walkingspeed,runningspeed,p);}
-  public boolean hungry(){return this.hunger<=Predator.DANGER_HUNGER;}
-  public int hunt(Prey[] x){
-    int index=0;
-    if(this.alive)for(int i=0;i<x.length;i++)if(PVector.dist(this.p,x[i].p)<PVector.dist(this.p,x[index].p)&&x[i].alive)index=i;
-    return index;
+  public boolean hungry(){return this.getHunger()<=Predator.DANGER_HUNGER;}
+  public int hunt(){
+    int index=0;boolean flag=false;
+    if(this.isAlive())for(int i=0;i<b.length;i++)if(PVector.dist(this.p,b[i].p)<PVector.dist(this.p,b[index].p)&&b[i].isAlive()){index=i;flag=true;}
+    return flag?index:-1;
   }
-  public void hunting(Prey[] k){
-    if(this.hungry()&&this.alive){
-      for(int i=0;i<PREY_NUM;i++)if(PVector.dist(this.p,k[i].p)<=Prey.DANGER_DIST&&k[i].alive){
-        k[i].v.x=k[i].p.x-this.p.x;
-        k[i].v.y=k[i].p.y-this.p.y;
-        k[i].setSpeed(k[i].RUNNING_SPEED);
+  public void hunting(){
+    if(this.hungry()&&this.isAlive()){
+      int index=this.hunt();
+      if(index!=-1&&PVector.dist(this.p,b[index].p)<=Animal.SIGHT){
+        this.v.x=b[index].p.x-this.p.x;
+        this.v.y=b[index].p.y-this.p.y;
+        this.setSpeed(this.getRunningSpeed());
       }
-      int index=this.hunt(k);
-      if(PVector.dist(this.p,k[index].p)<=Animal.SIGHT)
-      {
-        this.v.x=k[index].p.x-this.p.x;
-        this.v.y=k[index].p.y-this.p.y;
-        this.setSpeed(this.RUNNING_SPEED);
+      for(int i=0;i<PREY_NUM;i++){
+        if(PVector.dist(this.p,b[i].p)<=Prey.DANGER_DIST&&b[i].isAlive()){b[i].v.x=b[i].p.x-this.p.x;b[i].v.y=b[i].p.y-this.p.y;b[i].setSpeed(b[i].getRunningSpeed());}
+        else b[i].setSpeed(b[i].getWalkingSpeed());
       }
-      return;
     }
   }
   @Override public void update(){fill(#FF0000);super.update();}
