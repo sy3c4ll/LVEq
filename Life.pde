@@ -21,7 +21,8 @@ public class Life{
   public boolean detectCollisionX(){return this.getLoc().x<this.getSize()||this.getLoc().x>width-this.getSize();}
   public boolean detectCollisionY(){return this.getLoc().y<this.getSize()||this.getLoc().y>height-this.getSize();}
   public boolean detectCollision(Life x){return PVector.dist(this.getLoc(),x.getLoc())<this.getSize()+x.getSize();}
-  public void update(){grow();display();}
-  protected void grow(){this.age+=(FRAMEDEPENDENCY?millis()-CLOCK:frameCount-CLOCK)/(356*24)*FRAMEHOUR;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
+  public int regulate(){return FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK;}
+  public void update(){grow();display();this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
+  protected void grow(){this.age+=this.regulate()/(365*24)*FRAMEHOUR;}
   protected void display(){if(this.alive)ellipse(this.p.x,this.p.y,this.SIZE*2,this.SIZE*2);}
 }

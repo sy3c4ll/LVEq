@@ -1,11 +1,11 @@
 final double PREY_TO_PREDATOR_E=1,PLANT_TO_PREY_E=1; //<>//
 final int PREDATOR_NUM=100,PREY_NUM=1000,PLANT_NUM=2000,ARRAY_SIZE=10;
 Predator[] predator;Prey[] prey;Plant[] plant;
-int predatorAlive(){int sum=0;for(int i=0;i<PREDATOR_NUM;i++)if(predator[i].isAlive())sum++; return sum;}
-int hungrypred(){int sum=0;for (int i=0;i<PREDATOR_NUM;i++)if(predator[i].isAlive() && predator[i].hungry())sum++; return sum;}
+int predatorAlive(){int sum=0;for(int i=0;i<PREDATOR_NUM;i++)if(predator[i].isAlive())sum++;return sum;}
 int preyAlive(){int sum=0;for(int i=0;i<PREY_NUM;i++)if(prey[i].isAlive())sum++;return sum;}
-int hungryprey(){int sum=0;for (int i=0;i<PREY_NUM;i++)if(prey[i].isAlive() && prey[i].hungry())sum++; return sum;}
 int plantAlive(){int sum=0;for(int i=0;i<PLANT_NUM;i++)if(plant[i].isAlive())sum++;return sum;}
+int predatorHungry(){int sum=0;for(int i=0;i<PREDATOR_NUM;i++)if(predator[i].isAlive()&&predator[i].hungry())sum++;return sum;}
+int preyHungry(){int sum=0;for(int i=0;i<PREY_NUM;i++)if(prey[i].isAlive()&&prey[i].hungry())sum++;return sum;}
 void setup(){
   randomSeed(1);
   size(1000,1000,P2D);surface.setTitle("Lotka-Volterra Equations");surface.setResizable(false);frameRate(600);
@@ -41,8 +41,8 @@ void draw(){
 }
 void keyPressed(){
   println(Life.FRAMEDEPENDENCY?millis()+"ms":"Frame "+frameCount+" ("+frameRate+"fps)");
-  println("Predator : "+predatorAlive() + "hungry one : " + hungrypred());
-  println("Prey : "+preyAlive() + "hungry one : " + hungryprey());
+  println("Predator : "+predatorAlive() + "\tHungry : " + predatorHungry());
+  println("Prey : "+preyAlive() + "\tHungry : " + preyHungry());
   println("Plant : "+plantAlive());
   println();
 }

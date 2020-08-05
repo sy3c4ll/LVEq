@@ -15,7 +15,7 @@ public class Animal extends Life{
   public void feed(double food){this.hunger+=food;}
   public void setVelo(PVector v){this.v=v;}
   public void setSpeed(float s){this.v.setMag(s);}
-  protected void refresh(){this.p.add(PVector.mult(this.v,FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK));}
+  protected void refresh(){this.p.add(PVector.mult(this.v,this.regulate()));}
   protected void metabolism(){}
   protected void check(){if(this.hunger<Animal.CRITICAL_HUNGER)this.alive=false;}
   @Override protected void grow(){super.grow();}

@@ -22,6 +22,6 @@ public class Predator extends Animal{
       }
     }
   }
-  @Override public void metabolism(){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*(frameCount-CLOCK)*Life.FRAMEHOUR;this.org+=Predator.GROWTH*(frameCount-CLOCK);}
+  @Override public void metabolism(){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}
   @Override public void update(){fill(#FF0000);super.update();}
 }
