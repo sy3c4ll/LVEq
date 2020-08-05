@@ -1,5 +1,5 @@
-final double PREY_TO_PREDATOR_E=1,PLANT_TO_PREY_E=10; //<>// //<>//
-final int PREDATOR_NUM=100,PREY_NUM=1000,PLANT_NUM=2000,ARRAY_SIZE=10;
+final float PREY_TO_PREDATOR_E=10,PLANT_TO_PREY_E=10; //<>// //<>//
+final int PREDATOR_NUM=0,PREY_NUM=1000,PLANT_NUM=2000,ARRAY_SIZE=10;
 Predator[] predator;Prey[] prey;Plant[] plant;
 int predatorAlive(){int sum=0;for(int i=0;i<PREDATOR_NUM;i++)if(predator[i].isAlive())sum++;return sum;}
 int preyAlive(){int sum=0;for(int i=0;i<PREY_NUM;i++)if(prey[i].isAlive())sum++;return sum;}
@@ -7,7 +7,7 @@ int plantAlive(){int sum=0;for(int i=0;i<PLANT_NUM;i++)if(plant[i].isAlive())sum
 int predatorHungry(){int sum=0;for(int i=0;i<PREDATOR_NUM;i++)if(predator[i].isAlive()&&predator[i].hungry())sum++;return sum;}
 int preyHungry(){int sum=0;for(int i=0;i<PREY_NUM;i++)if(prey[i].isAlive()&&prey[i].hungry())sum++;return sum;}
 int poorpred(){int sum=0; for(int i=0;i<PREDATOR_NUM;i++)if(predator[i].getHunger()<=0)sum++;return sum;}
-int poorprey(){int sum=0; for(int i=0;i<PREY_NUM;i++)if(prey[i].getHunger()<=0)sum++;return sum;}
+int poorprey(){int sum=0; for(int i=0;i<PREY_NUM;i++){if(prey[i].danger()&&prey[i].isAlive())sum=sum+1;}return sum;}
 void setup(){
   randomSeed(1);
   size(1000,1000,P2D);surface.setTitle("Lotka-Volterra Equations");surface.setResizable(false);frameRate(600);
@@ -16,8 +16,8 @@ void setup(){
   for(int i=0;i<PREDATOR_NUM;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(10,100),random(3,5),true,random(.04,.08),random(.8,1.2),new PVector(random(width),random(height)));
   for(int i=0;i<PREY_NUM;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(10,100),random(2,4),true,random(.04,.08),random(.8,1.2),new PVector(random(width),random(height)));
   for(int i=0;i<PLANT_NUM;i++)plant[i]=new Plant(random(Plant.MIN_AGE,Plant.MAX_AGE),new PVector(random(width),random(height)));
-  for(int i=PREDATOR_NUM;i<PREDATOR_NUM*ARRAY_SIZE;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(10,100),random(3,5),false,random(.4,.8),random(.8,1.2),new PVector(random(width),random(height)));
-  for(int i=PREY_NUM;i<PREY_NUM*ARRAY_SIZE;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(10,100),random(2,4),false,random(.4,.8),random(.8,1.2),new PVector(random(width),random(height)));
+  for(int i=PREDATOR_NUM;i<PREDATOR_NUM*ARRAY_SIZE;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(10,100),random(3,5),false,random(.04,.08),random(.8,1.2),new PVector(random(width),random(height)));
+  for(int i=PREY_NUM;i<PREY_NUM*ARRAY_SIZE;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(10,100),random(2,4),false,random(.04,0.8),random(.8,1.2),new PVector(random(width),random(height)));
   for(int i=PLANT_NUM;i<PLANT_NUM*ARRAY_SIZE;i++)plant[i]=new Plant(random(0,Plant.MIN_AGE),new PVector(random(width),random(height))); //TODO
   for(int i=0;i<PREDATOR_NUM*ARRAY_SIZE;i++)predator[i].link(predator,prey,plant);
   for(int i=0;i<PREY_NUM*ARRAY_SIZE;i++)prey[i].link(predator,prey,plant);

@@ -1,15 +1,15 @@
 public class Life{
-  public static final double FRAMEHOUR=.1;
+  public static final float FRAMEHOUR=.1;
   public static final boolean FRAMEDEPENDENCY=false;
-  protected double age;
+  protected float age;
   protected float SIZE;
   protected boolean alive,reproduced;
   protected int CLOCK;
   public PVector p;
   public Predator[] a;public Prey[] b;public Plant[] c;
-  public Life(double age,float size,boolean alive,PVector p){this.age=age;this.SIZE=size;this.alive=alive;this.reproduced=false;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;this.p=p;}
+  public Life(float age,float size,boolean alive,PVector p){this.age=age;this.SIZE=size;this.alive=alive;this.reproduced=false;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;this.p=p;}
   public void link(Predator[] a,Prey[] b,Plant[] c){this.a=a;this.b=b;this.c=c;}
-  public double getAge(){return this.age;}
+  public float getAge(){return this.age;}
   public float getSize(){return this.SIZE;}
   public boolean isAlive(){return this.alive;}
   public int getClock(){return this.CLOCK;}
