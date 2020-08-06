@@ -1,7 +1,7 @@
 public class Predator extends Animal{
-  public static final double BASAL_META=1,ACTIVE_META=.5,STORAGE=1,DANGER_HUNGER=30,MAX_AGE=20;
-  public Predator(){this.kill();}
-  public Predator(double age,Vector p){this.init(p);this.age=age;}
+  public static final double GROWTH=1, BIRTH_CYCLE=3;
+  public static final double DANGER_HUNGER=30,MAX_AGE=20;
+  public Predator(double age,double org,double hunger,double size,boolean alive,double walkingspeed,double runningspeed,Vector p){super(age,org,hunger,size,alive,walkingspeed,runningspeed,p);}
   public boolean hungry(){return this.getHunger()<=Predator.DANGER_HUNGER;}
   @Override public int hunt(){
     int index=0;boolean flag=false;
@@ -27,8 +27,10 @@ public class Predator extends Animal{
       }
     }else this.setSpeed(this.getWalkingSpeed());
   }
-  @Override public void kill(){super.kill();}
-  public void init(Vector p){super.init(random((double)3,(double)5),random((double).4,(double).8),random((double)8,(double)12),p);}
-  @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Predator.BASAL_META+Predator.ACTIVE_META*this.getSpeed()+Predator.STORAGE)*this.hours();this.org+=Predator.STORAGE*this.hours();}else{this.org-=(Predator.BASAL_META+Predator.ACTIVE_META*this.getSpeed())*this.hours();}}
-  @Override public void update(){fill(#FF0000);super.update();}
+  public int smalldeadpredator(){for(int i=0;i<MAX_PREDATOR_NUM;i++){int k=((int)floor(random(0,MAX_PREDATOR_NUM)+i))%MAX_PREDATOR_NUM; if(!a[k].isAlive()) return k;}return -1;} 
+  public void reproducepredator(){if ((int)floor((float)this.getAge())%Predator.BIRTH_CYCLE==0&&this.isAlive()){int k=smalldeadpredator();
+if(k!=-1) {this.setAge(this.getAge()+1); reproducetime+=1;
+a[k]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(10,100),random(2,4),true,random(.4,.8),random(8,12),new Vector(random(0,(double)width),random(0,(double)height)));}}}
+  @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else{this.org-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed());}}
+  @Override public void update(){fill(#FF0000);this.reproducepredator();super.update();}
 }

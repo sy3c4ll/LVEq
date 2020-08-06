@@ -1,6 +1,5 @@
- //<>//
-final double PREY_TO_PREDATOR_E=10,PLANT_TO_PREY_E=10; //<>// //<>// //<>//
-final int PREDATOR_NUM=100,PREY_NUM=1000,PLANT_NUM=2000,MAX_PREDATOR_NUM=1000,MAX_PREY_NUM=10000,MAX_PLANT_NUM=20000;
+final double PREY_TO_PREDATOR_E=10,PLANT_TO_PREY_E=10;
+final int PREDATOR_NUM=0,PREY_NUM=1000,PLANT_NUM=2000,MAX_PREDATOR_NUM=10000,MAX_PREY_NUM=10000,MAX_PLANT_NUM=20000;
 Predator[] predator;Prey[] prey;Plant[] plant;
 double random(double a,double b){return Math.random()*(b-a)+a;}
 double min(double a,double b){return a<b?a:b;}
@@ -18,16 +17,16 @@ void setup(){
   predator=new Predator[MAX_PREDATOR_NUM];prey=new Prey[MAX_PREY_NUM];plant=new Plant[MAX_PLANT_NUM];
   for(int i=0;i<PREDATOR_NUM;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),new Vector(random(0,(double)width),random(0,(double)height)));
   for(int i=0;i<PREY_NUM;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),new Vector(random(0,(double)width),random(0,(double)height)));
-  for(int i=0;i<PLANT_NUM;i++)plant[i]=new Plant(random(Plant.MIN_AGE,Plant.MAX_AGE),new Vector(random(0,(double)width),random(0,(double)height)));
+  for(int i=0;i<PLANT_NUM;i++)plant[i]=new Plant(random(0,Plant.MAX_AGE),new Vector(random(0,(double)width),random(0,(double)height)));
   for(int i=PREDATOR_NUM;i<MAX_PREDATOR_NUM;i++)predator[i]=new Predator();
   for(int i=PREY_NUM;i<MAX_PREY_NUM;i++)prey[i]=new Prey();
   for(int i=PLANT_NUM;i<MAX_PLANT_NUM;i++)plant[i]=new Plant();
   for(int i=0;i<MAX_PREDATOR_NUM;i++)predator[i].link(predator,prey,plant);
   for(int i=0;i<MAX_PREY_NUM;i++)prey[i].link(predator,prey,plant);
   for(int i=0;i<MAX_PLANT_NUM;i++)plant[i].link(predator,prey,plant);
-} //<>//
-void draw(){ //<>//
-  background(#000000); //<>//
+}
+void draw(){
+  background(#000000);
   for(int i=0;i<PREDATOR_NUM;i++)if(predator[i].isAlive()){
     if(predator[i].detectCollisionX()){predator[i].p.x=min(max(predator[i].p.x,predator[i].getSize()),width-predator[i].getSize());predator[i].v.x=-predator[i].v.x;}
     if(predator[i].detectCollisionY()){predator[i].p.y=min(max(predator[i].p.y,predator[i].getSize()),height-predator[i].getSize());predator[i].v.y=-predator[i].v.y;}
@@ -44,6 +43,7 @@ void draw(){ //<>//
   for(int i=0;i<PREY_NUM;i++)prey[i].update();
   for(int i=0;i<PLANT_NUM;i++)plant[i].update();
 }
+
 void keyPressed(){
   println(Life.FRAMEDEPENDENCY?millis()+"ms":"Frame "+frameCount+" ("+frameRate+"fps)");
   println("Predator : "+predatorAlive() + "\tHungry : " + predatorHungry() + "\tStarving : " +predatorStarving());
