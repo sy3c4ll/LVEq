@@ -5,7 +5,7 @@ public class Predator extends Animal{
   public boolean hungry(){return this.getHunger()<=Predator.DANGER_HUNGER;}
   @Override public int hunt(){
     int index=0;boolean flag=false;
-    if(this.isAlive())for(int i=0;i<b.length;i++)if(Vector.dist(this.p,b[i].p)<Vector.dist(this.p,b[index].p)&&b[i].isAlive()){index=i;flag=true;}
+    if(this.isAlive())for(int i=0;i<b.length;i++)if(Vector.disten(this.p,b[i].p)<Vector.disten(this.p,b[index].p)&&b[i].isAlive()){index=i;flag=true;}
     return flag?index:-1;
   }
   @Override public void chase(){

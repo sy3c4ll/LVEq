@@ -3,16 +3,16 @@ public class Prey extends Animal{
   public Prey(){this.kill();}
   public Prey(double age,Vector p){this.init(p);this.age=age;}
   public boolean hungry(){return this.getHunger()<=Prey.DANGER_HUNGER;}
-  public boolean danger(){if(this.isAlive()){for(int i=0;i<a.length;i++)if(a[i].isAlive()&&a[i].hungry()&&Vector.dist(this.p,a[i].p)<=Prey.DANGER_DIST)return true;}return false;}
+  public boolean danger(){if(this.isAlive()){for(int i=0;i<a.length;i++)if(a[i].isAlive()&&a[i].hungry()&&Vector.disten(this.p,a[i].p)<=Prey.DANGER_DIST)return true;}return false;}
   public int hunt(){
     int index=0;boolean flag=false;
-    for(int i=0;i<c.length;i++)if(c[i].isAlive()&&Vector.dist(this.p,c[i].p)<Vector.dist(this.p,c[index].p)){index=i;flag=true;}
+    for(int i=0;i<c.length;i++)if(c[i].isAlive()&&Vector.disten(this.p,c[i].p)<Vector.disten(this.p,c[index].p)){index=i;flag=true;}
     return flag?index:-1;
   }
   public void chase(){
     if(this.hungry()&&this.isAlive()&&!this.danger()){
       int index=this.hunt();
-      if(index!=-1&&Vector.dist(this.p,c[index].p)<=Animal.SIGHT&&c[index].alive){
+      if(index!=-1&&Vector.disten(this.p,c[index].p)<=Animal.SIGHT&&c[index].alive){
         this.v.x=c[index].p.x-this.p.x;
         this.v.y=c[index].p.y-this.p.y;
         this.setSpeed((double)this.getRunningSpeed());
