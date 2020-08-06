@@ -5,7 +5,7 @@ public class Vector extends java.awt.geom.Point2D.Double{
   public void set(double x,double y){super.setLocation(x,y);}
   public void set(Vector a){super.setLocation(a);}
   public void set(double[] a){if(a.length>=1)this.x=a[0];if(a.length>=2)this.y=a[1];}
-  public static Vector random2D(){Vector a=new Vector(Math.random(),Math.random());a.normalize();return a;}
+  public static Vector random2D(){return new Vector(Math.random()*2-1,Math.random()*2-1);}
   public Vector copy(){return (Vector)this.clone();}
   public double mag(){return this.distance(0,0);}
   public double magSq(){return this.distanceSq(0,0);}

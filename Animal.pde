@@ -1,5 +1,5 @@
 public class Animal extends Life{
-  public static final double SIGHT=50,CRITICAL_ORG=0;
+  public static final double SIGHT=200,CRITICAL_ORG=0;
   protected double hunger,org,WALKING_SPEED,RUNNING_SPEED;
   public Vector v;
   public Animal(){this.kill();}
@@ -18,7 +18,7 @@ public class Animal extends Life{
   public int hunt(){return 0;}
   public void chase(){}
   @Override public void kill(){super.kill();this.hunger=0;this.org=0;this.WALKING_SPEED=0;this.RUNNING_SPEED=0;this.v=new Vector();}
-  public void init(double size,double walkingspeed,double runningspeed,Vector p){super.init(size,p);this.hunger=random(10,100);this.org=random(10,100);this.WALKING_SPEED=walkingspeed;this.RUNNING_SPEED=runningspeed;this.v=Vector.random2D();this.v.limit(this.WALKING_SPEED);}
+  public void init(double size,double walkingspeed,double runningspeed,Vector p){super.init(size,p);this.hunger=random(10,100);this.org=random(10,100);this.WALKING_SPEED=walkingspeed;this.RUNNING_SPEED=runningspeed;this.v=Vector.random2D();this.v.setMag(this.WALKING_SPEED);}
   protected void refresh(){this.p.add(Vector.mult(this.v,this.hours()));}
   protected void metabolism(){}
   protected void check(){if(this.org<Animal.CRITICAL_ORG)this.alive=false;}

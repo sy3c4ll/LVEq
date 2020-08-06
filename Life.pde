@@ -1,6 +1,6 @@
 public class Life{
   public static final boolean FRAMEDEPENDENCY=false;
-  public static final double FRAMEHOUR=.1;
+  public static final double FRAMEHOUR=1;
   protected double age,SIZE;
   protected boolean alive;
   protected int CLOCK;
@@ -18,9 +18,9 @@ public class Life{
   public void setSize(double size){this.SIZE=size;}
   public void setAlive(boolean alive){this.alive=alive;}
   public void setLoc(Vector p){this.p=p;}
-  public boolean detectCollisionX(){return this.getLoc().x<this.getSize()||this.getLoc().x>width-this.getSize();}
-  public boolean detectCollisionY(){return this.getLoc().y<this.getSize()||this.getLoc().y>height-this.getSize();}
-  public boolean detectCollision(Life x){return Vector.dist(this.getLoc(),x.getLoc())<this.getSize()+x.getSize();}
+  public boolean detectCollisionX(){return this.p.x<this.getSize()||this.p.x>width-this.getSize();}
+  public boolean detectCollisionY(){return this.p.y<this.getSize()||this.p.y>height-this.getSize();}
+  public boolean detectCollision(Life k){return Vector.dist(this.p,k.p)<this.getSize()+k.getSize();}
   public double hours(){return (Life.FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK)*Life.FRAMEHOUR;}
   public double years(){return (Life.FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK)*Life.FRAMEHOUR/(365*24);}
   public void kill(){this.age=0;this.SIZE=0;this.alive=false;this.CLOCK=0;this.p=new Vector();}
