@@ -19,8 +19,8 @@ public class Vector extends java.awt.geom.Point2D.Double{
   public void mult(double k){this.x*=k;this.y*=k;}
   public static Vector div(Vector a,double k){return new Vector(a.x/k,a.y/k);}
   public void div(double k){this.x/=k;this.y/=k;}
-  public static double disten(Vector a,Vector b){return java.awt.geom.Point2D.Double.distance(a.x,a.y,b.x,b.y);}
-  public double disten(Vector a){return this.distance(a);}
+  public static double dist(Vector a,Vector b){return java.awt.geom.Point2D.Double.distance(a.x,a.y,b.x,b.y);}
+  public double dist(Vector a){return this.distance(a);}
   public static Vector normalize(Vector a){a.x/=a.mag();a.y/=a.mag();return a;}
   public void normalize(){this.x/=this.mag();this.y/=this.mag();}
   public static Vector limit(Vector a,double m){if(a.mag()>m)a.setMag(m);return a;}
