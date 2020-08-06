@@ -25,6 +25,10 @@ public class Predator extends Animal{
       }
     }else this.setSpeed((double)this.getWalkingSpeed());
   }
+  public int smalldeadpredator(){for(int i=0;i<MAX_PREY_NUM;i++){int k=((int)floor(random(0,MAX_PREY_NUM)+i))%MAX_PREY_NUM; if(!a[k].isAlive()) return k;}return -1;} 
+  public void reproducepredator(){if ((int)floor((float)this.getAge())%Predator.BIRTH_CYCLE==0&&this.isAlive()){int k=smalldeadpredator();
+if(k!=-1) {this.setAge(this.getAge()+1); reproducetime+=1;
+a[k]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(10,100),random(2,4),true,random(.4,.8),random(8,12),new Vector(random(0,(double)width),random(0,(double)height)));}}}
   @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else{this.org-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed());}}
-  @Override public void update(){fill(#FF0000);super.update();}
+  @Override public void update(){fill(#FF0000);this.reproducepredator();super.update();}
 }

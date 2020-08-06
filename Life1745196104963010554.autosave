@@ -1,5 +1,5 @@
 public class Life{
-  public static final double FRAMEHOUR=1;
+  public static final double FRAMEHOUR=.1;
   public static final boolean FRAMEDEPENDENCY=false;
   protected double age;
   protected double SIZE;
@@ -8,7 +8,6 @@ public class Life{
   public Vector p;
   public Predator[] a;public Prey[] b;public Plant[] c;
   public Life(double age,double size,boolean alive,Vector p){this.age=age;this.SIZE=size;this.alive=alive;this.reproduced=false;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;this.p=p;}
-  public void link(Predator[] a,Prey[] b,Plant[] c){this.a=a;this.b=b;this.c=c;}
   public double getAge(){return this.age;}
   public double getSize(){return this.SIZE;}
   public boolean isAlive(){return this.alive;}
