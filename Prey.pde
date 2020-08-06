@@ -1,6 +1,7 @@
 public class Prey extends Animal{
-  public static final double DANGER_HUNGER=30,MAX_AGE=30,DANGER_DIST=70,BIRTH_CYCLE=3,ADULT_AGE=10;
-  public Prey(double age,double org,double hunger,double size,boolean alive,double walkingspeed,double runningspeed,Vector p){super(age,org,hunger,size,alive,walkingspeed,runningspeed,p);}
+  public static final double BASAL_META=1,ACTIVE_META=.5,STORAGE=1,DANGER_HUNGER=30,MAX_AGE=30,DANGER_DIST=70,BIRTH_CYCLE=3,ADULT_AGE=10;
+  public Prey(){this.kill();}
+  public Prey(double age,Vector p){this.init(p);this.age=age;}
   public boolean hungry(){return this.getHunger()<=Prey.DANGER_HUNGER;}
   public boolean danger(){if(this.isAlive()){for(int i=0;i<a.length;i++)if(a[i].isAlive()&&a[i].hungry()&&Vector.dist(this.p,a[i].p)<=Prey.DANGER_DIST)return true;}return false;}
   public int hunt(){
@@ -8,7 +9,7 @@ public class Prey extends Animal{
     for(int i=0;i<c.length;i++)if(c[i].isAlive()&&Vector.dist(this.p,c[i].p)<Vector.dist(this.p,c[index].p)){index=i;flag=true;}
     return flag?index:-1;
   }
-  public void feeding(){
+  public void chase(){
     if(this.hungry()&&this.isAlive()&&!this.danger()){
       int index=this.hunt();
       if(index!=-1&&Vector.dist(this.p,c[index].p)<=Animal.SIGHT&&c[index].alive){
@@ -26,6 +27,8 @@ public class Prey extends Animal{
       else b[i].setAlive(true);
     }
   }*/
-  @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed()+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else {this.org-=Animal.BASAL_META+Animal.ACTIVE_META*this.getSpeed();}}
+  @Override public void kill(){super.kill();}
+  public void init(Vector p){super.init(random(2,4),random(.04,.08),random(.8,1.2),p);}
+  @Override public void metabolism(){if(this.hunger>0){this.hunger-=(Prey.BASAL_META+Prey.ACTIVE_META*this.getSpeed()+Prey.STORAGE)*this.hours();this.org+=Prey.STORAGE*this.hours();}else{this.org-=(Prey.BASAL_META+Prey.ACTIVE_META*this.getSpeed())*this.hours();}}
   @Override public void update(){fill(#00FF00);/*this.reproduce();*/super.update();}
 }

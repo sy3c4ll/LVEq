@@ -1,8 +1,9 @@
 public class Animal extends Life{
-  public static final double BASAL_META=1,ACTIVE_META=.5,SIGHT=50,CRITICAL_ORG=0;
+  public static final double SIGHT=50,CRITICAL_ORG=0;
   protected double hunger,org,WALKING_SPEED,RUNNING_SPEED;
   public Vector v;
-  public Animal(double age,double hunger,double org,double size,boolean alive,double walkingspeed,double runningspeed,Vector p){super(age,size,alive,p);this.hunger=hunger;this.org=org;this.WALKING_SPEED=walkingspeed;this.RUNNING_SPEED=runningspeed;this.v=Vector.random2D();this.v.limit((double)walkingspeed);}
+  public Animal(){this.kill();}
+  public Animal(double age,double size,double walkingspeed,double runningspeed,Vector p){this.init(size,walkingspeed,runningspeed,p);this.age=age;}
   public double getHunger(){return this.hunger;}
   public double getOrg(){return this.org;}
   public double getWalkingSpeed(){return this.WALKING_SPEED;}
@@ -14,7 +15,11 @@ public class Animal extends Life{
   public void setOrg(double org){this.org=org;}
   public void setVelo(Vector v){this.v=v;}
   public void setSpeed(double s){this.v.setMag(s);}
-  protected void refresh(){this.p.add(Vector.mult(this.v,this.regulate()));}
+  public int hunt(){return 0;}
+  public void chase(){}
+  @Override public void kill(){super.kill();this.hunger=0;this.org=0;this.WALKING_SPEED=0;this.RUNNING_SPEED=0;this.v=new Vector();}
+  public void init(double size,double walkingspeed,double runningspeed,Vector p){super.init(size,p);this.hunger=random(10,100);this.org=random(10,100);this.WALKING_SPEED=walkingspeed;this.RUNNING_SPEED=runningspeed;this.v=Vector.random2D();this.v.limit(this.WALKING_SPEED);}
+  protected void refresh(){this.p.add(Vector.mult(this.v,this.hours()));}
   protected void metabolism(){}
   protected void check(){if(this.org<Animal.CRITICAL_ORG)this.alive=false;}
   @Override protected void grow(){super.grow();}

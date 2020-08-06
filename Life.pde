@@ -1,13 +1,13 @@
 public class Life{
-  public static final double FRAMEHOUR=.1;
   public static final boolean FRAMEDEPENDENCY=false;
-  protected double age;
-  protected double SIZE;
-  protected boolean alive,reproduced;
+  public static final double FRAMEHOUR=.1;
+  protected double age,SIZE;
+  protected boolean alive;
   protected int CLOCK;
   public Vector p;
   public Predator[] a;public Prey[] b;public Plant[] c;
-  public Life(double age,double size,boolean alive,Vector p){this.age=age;this.SIZE=size;this.alive=alive;this.reproduced=false;this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;this.p=p;}
+  public Life(){this.kill();}
+  public Life(double age,double size,Vector p){this.init(size,p);this.age=age;}
   public void link(Predator[] a,Prey[] b,Plant[] c){this.a=a;this.b=b;this.c=c;}
   public double getAge(){return this.age;}
   public double getSize(){return this.SIZE;}
@@ -21,8 +21,11 @@ public class Life{
   public boolean detectCollisionX(){return this.getLoc().x<this.getSize()||this.getLoc().x>width-this.getSize();}
   public boolean detectCollisionY(){return this.getLoc().y<this.getSize()||this.getLoc().y>height-this.getSize();}
   public boolean detectCollision(Life x){return Vector.dist(this.getLoc(),x.getLoc())<this.getSize()+x.getSize();}
-  public int regulate(){return FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK;}
-  public void update(){grow();display();this.CLOCK=FRAMEDEPENDENCY?millis():frameCount;}
-  protected void grow(){this.age+=this.regulate()/(365*24)*FRAMEHOUR;}
-  protected void display(){if(this.alive)ellipse((float)this.p.x,(float)this.p.y,(float)this.SIZE*2,(float)this.SIZE*2);}
+  public double hours(){return (Life.FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK)*Life.FRAMEHOUR;}
+  public double years(){return (Life.FRAMEDEPENDENCY?millis()-this.CLOCK:frameCount-this.CLOCK)*Life.FRAMEHOUR/(365*24);}
+  public void kill(){this.age=0;this.SIZE=0;this.alive=false;this.CLOCK=0;this.p=new Vector();}
+  public void init(double size,Vector p){this.age=0;this.SIZE=size;this.alive=true;this.CLOCK=Life.FRAMEDEPENDENCY?millis():frameCount;this.p=p;}
+  public void update(){if(this.alive){grow();display();this.CLOCK=Life.FRAMEDEPENDENCY?millis():frameCount;}}
+  protected void grow(){this.age+=this.years();}
+  protected void display(){ellipse((float)this.p.x,(float)this.p.y,(float)this.SIZE*2,(float)this.SIZE*2);}
 }
