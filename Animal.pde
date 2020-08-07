@@ -14,7 +14,7 @@ public class Animal extends Life{
   public void setOrg(double org){this.org=org;}
   public void setVelo(Vector v){this.v=v;}
   public void setSpeed(double s){this.v.setMag(s);}
-  protected void refresh(){this.p.add(Vector.mult(this.v,this.regulate()));}
+  protected void refresh(){this.p.add(Vector.mult(this.v,this.regulate()*Life.FRAMEHOUR));}
   protected void metabolism(){}
   protected void check(){if(this.org<Animal.CRITICAL_ORG)this.alive=false;}
   @Override protected void grow(){super.grow();}
