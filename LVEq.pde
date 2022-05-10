@@ -1,5 +1,5 @@
 final double PREY_TO_PREDATOR_E=0.165,PLANT_TO_PREY_E=0.145; //<>// //<>//
-final int PREDATOR_NUM=5000,PREY_NUM=5000,PLANT_NUM=5000,MAX_PREDATOR_NUM=100000,MAX_PREY_NUM=100000,MAX_PLANT_NUM=5000;
+final int PREDATOR_NUM=100,PREY_NUM=1000,PLANT_NUM=1000,MAX_PREDATOR_NUM=200,MAX_PREY_NUM=2000,MAX_PLANT_NUM=1000;
 Predator[] predator;Prey[] prey;Plant[] plant;
 int reproducetime=0,k=0;
 PrintWriter s;
@@ -18,11 +18,11 @@ void setup(){
   size(1000,1000,P2D);surface.setTitle("Lotka-Volterra Equations");surface.setResizable(false);frameRate(600);
   background(#000000);noStroke();fill(#FFFFFF);
   predator=new Predator[MAX_PREDATOR_NUM];prey=new Prey[MAX_PREY_NUM];plant=new Plant[MAX_PLANT_NUM];
-  for(int i=0;i<PREDATOR_NUM;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(10,100),3,true,1,80000,new Vector(random(0,(double)width),random(0,(double)height)));
-  for(int i=0;i<PREY_NUM;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(10,100),3,true,.5,45000,new Vector(random(0,(double)width),random(0,(double)height)));
+  for(int i=0;i<PREDATOR_NUM;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(10,100),3,true,1,8,new Vector(random(0,(double)width),random(0,(double)height)));
+  for(int i=0;i<PREY_NUM;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(10,100),3,true,.5,4.5,new Vector(random(0,(double)width),random(0,(double)height)));
   for(int i=0;i<PLANT_NUM;i++)plant[i]=new Plant(random(Plant.MIN_AGE,10000),new Vector(random(0,(double)width),random(0,(double)height)));
-  for(int i=PREDATOR_NUM;i<MAX_PREDATOR_NUM;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(10,100),3,false,1,80000,new Vector(random(0,(double)width),random(0,(double)height)));
-  for(int i=PREY_NUM;i<MAX_PREY_NUM;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(10,100),3,false,.5,45000,new Vector(random(0,(double)width),random(0,(double)height)));
+  for(int i=PREDATOR_NUM;i<MAX_PREDATOR_NUM;i++)predator[i]=new Predator(random(0,Predator.MAX_AGE),random(10,100),random(10,100),3,false,1,8,new Vector(random(0,(double)width),random(0,(double)height)));
+  for(int i=PREY_NUM;i<MAX_PREY_NUM;i++)prey[i]=new Prey(random(0,Prey.MAX_AGE),random(10,100),random(10,100),3,false,.5,4.5,new Vector(random(0,(double)width),random(0,(double)height)));
   for(int i=PLANT_NUM;i<MAX_PLANT_NUM;i++)plant[i]=new Plant(random(0,Plant.MIN_AGE),new Vector(random(0,(double)width),random(0,(double)height))); //TODO
   for(int i=0;i<MAX_PREDATOR_NUM;i++)predator[i].link(predator,prey,plant);
   for(int i=0;i<MAX_PREY_NUM;i++)prey[i].link(predator,prey,plant);

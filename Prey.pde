@@ -28,7 +28,7 @@
 int k=smalldeadprey();
 if(k!=-1) {this.setAge(this.getAge()+(double)1/re); 
 prey[k]=new Prey(0,random(10,30),random(10,30),3,true,
-.5,45000, new Vector(max(min((this.p.x+random(-30,30)),width),0),max(min((this.p.y+random(-30,30)),height),0)));}}}}
-  @Override public void metabolism(){if(this.hunger>0){this.hunger-=(7500+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else {this.org-=7500*Life.FRAMEHOUR*this.regulate();}}
+.5,4.5, new Vector(max(min((this.p.x+random(-30,30)),width),0),max(min((this.p.y+random(-30,30)),height),0)));}}}}
+  @Override public void metabolism(){if(this.hunger>0){this.hunger-=(7.5+Predator.GROWTH)*this.regulate()*Life.FRAMEHOUR;this.org+=Predator.GROWTH*this.regulate();}else {this.org-=7.5*Life.FRAMEHOUR*this.regulate();}}
   @Override public void update(){fill(#00FF00);this.reproduceprey();super.update();}
 }
